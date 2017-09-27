@@ -4,7 +4,7 @@ require(__DIR__.'/../vendor/autoload.php');
 
 $application = new \Symfony\Component\Console\Application('ghcli');
 
-$application->setVersion('alpha');
+$application->setVersion('0.1.2');
 
 /**
  * Get github token :
