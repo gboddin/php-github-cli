@@ -23,7 +23,7 @@ class Set extends GithubCommand
             ->addArgument('sha', InputArgument::REQUIRED, 'Commit SHA')
             ->addOption('state', 's', InputOption::VALUE_REQUIRED, 'State')
             ->addOption('context', 'c', InputOption::VALUE_REQUIRED, 'Context')
-            ->addOption('description', 'd', InputOption::VALUE_REQUIRED,'Short description')
+            ->addOption('description', 'd', InputOption::VALUE_REQUIRED, 'Short description')
             ->addOption('target_url', 't', InputOption::VALUE_REQUIRED, 'Target URL');
     }
 
