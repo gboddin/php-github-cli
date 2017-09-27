@@ -19,5 +19,11 @@
             "Gbo\\PhpGithubCli\\": "src"
         }
     },
-    "bin": ["bin/ghcli"]
+    "bin": [
+        "bin/ghcli"
+    ],
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.0"
+    }
+
 }

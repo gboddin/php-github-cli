@@ -6,10 +6,6 @@ $application = new \Symfony\Component\Console\Application('ghcli');
 
 $application->setVersion('alpha');
 
-/* register all the modules in the command line tool : */
-
-$modules = glob(__DIR__.'/../src/Module/*/*.php');
-
 /**
  * Get github token :
  */
@@ -32,15 +28,19 @@ if(getenv('GITHUB_API_TOKEN')) {
     }
 }
 
+
+/* register all the modules in the command line tool : */
+
+$modules = glob(__DIR__.'/../src/Module/*/*.php');
+
+/**
+ * Setup all modules
+ */
 foreach ($modules as $module) {
     $moduleNameParts = explode('/', $module);
-
     $moduleName = str_replace('.php', '', array_pop($moduleNameParts));
-
     $moduleNameSpace = array_pop($moduleNameParts);
-
     $moduleClass = sprintf('\\Gbo\\PhpGithubCli\\Module\\%s\\%s', $moduleNameSpace, $moduleName);
-
     $application->add(
         new $moduleClass(
                 $token
@@ -48,5 +48,7 @@ foreach ($modules as $module) {
     );
 }
 
-
+/**
+ * Run the application
+ */
 $application->run();

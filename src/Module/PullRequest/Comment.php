@@ -8,6 +8,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Comment extends GithubCommand
 {
+
+    /**
+     * Symfony cli module config
+     */
     protected function configure()
     {
         $this
@@ -19,13 +23,23 @@ class Comment extends GithubCommand
             ->addArgument('comment', InputArgument::REQUIRED, 'Comment');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    /**
+     * githubExec implementation
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return array
+     * @throws \Github\Exception\MissingArgumentException
+     */
+    protected function githubExec(InputInterface $input, OutputInterface $output)
     {
-        var_dump(self::$githubClient->issues()->comments()->create(
-            $input->getArgument('org'),
-            $input->getArgument('repo'),
-            $input->getArgument('pr'),
-            ['body' => $input->getArgument('comment')]
-        ));
+        return self::$githubClient
+            ->issues()
+            ->comments()
+            ->create(
+                $input->getArgument('org'),
+                $input->getArgument('repo'),
+                $input->getArgument('pr'),
+                ['body' => $input->getArgument('comment')]
+            );
     }
 }
