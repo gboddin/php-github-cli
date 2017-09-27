@@ -1,0 +1,52 @@
+#!/usr/bin/env php
+<?php
+require(__DIR__.'/../vendor/autoload.php');
+
+$application = new \Symfony\Component\Console\Application('ghcli');
+
+$application->setVersion('alpha');
+
+/* register all the modules in the command line tool : */
+
+$modules = glob(__DIR__.'/../src/Module/*/*.php');
+
+/**
+ * Get github token :
+ */
+$token = null;
+if(getenv('GITHUB_API_TOKEN')) {
+    $token = getenv('GITHUB_API_TOKEN');
+} else {
+    $configFiles = [
+        '.git/config',
+        getenv('HOME').'/.git/config',
+    ];
+    foreach($configFiles as $configFile) {
+        if(file_exists($configFile)) {
+            $config = parse_ini_file($configFile, true);
+            if(!empty($config['github']['token'])) {
+                $token = $config['github']['token'];
+                break;
+            }
+        }
+    }
+}
+
+foreach ($modules as $module) {
+    $moduleNameParts = explode('/', $module);
+
+    $moduleName = str_replace('.php', '', array_pop($moduleNameParts));
+
+    $moduleNameSpace = array_pop($moduleNameParts);
+
+    $moduleClass = sprintf('\\Gbo\\PhpGithubCli\\Module\\%s\\%s', $moduleNameSpace, $moduleName);
+
+    $application->add(
+        new $moduleClass(
+                $token
+        )
+    );
+}
+
+
+$application->run();
