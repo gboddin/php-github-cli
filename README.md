@@ -29,7 +29,8 @@ token=xxxxxxxxx
 ## Usage
 
 ```sh
-./bin/ghcli pr:comment octocat Hello-World 1 "Hello"
+./vendor/bin/ghcli pr:comment octocat Hello-World 1 "Hello"
+./vendor/bin/ghcli status:set octocat Hello-World 33375d5f193cfa8d0fe2998ec312c871639257bf -s success -c my/context -t http://www.google.com -d "You have created/updated a commit status my friend"
 ```
 
 ## Current modules
@@ -38,7 +39,7 @@ token=xxxxxxxxx
 ghcli alpha
 
 Usage:
-  ghcli [options] [arguments]
+  command [options] [arguments]
 
 Options:
   -h, --help            Display this help message
@@ -54,4 +55,6 @@ Available commands:
   list        Lists commands
  pr
   pr:comment  Comment a pull request
+ status
+  status:set  Creates/updates a commit status
 ```
