@@ -1,0 +1,16 @@
+{
+    "name": "gboddin/php-github-cli",
+    "description": "Github PHP CLI client",
+    "type": "project",
+    "require": {
+        "symfony/console": "^3.3",
+        "knplabs/github-api": "^2.5"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gregory Boddin",
+            "email": "gregory@siwhine.net"
+        }
+    ]
+}
