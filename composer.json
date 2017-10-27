@@ -3,7 +3,7 @@
     "description": "Github PHP CLI client",
     "type": "project",
     "require": {
-        "symfony/console": "^2.7",
+        "symfony/console": "~2.7",
         "knplabs/github-api": "^2.5",
         "php-http/guzzle6-adapter": "^1.1"
     },

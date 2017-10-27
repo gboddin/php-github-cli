@@ -31,6 +31,9 @@ token=xxxxxxxxx
 ```sh
 ./vendor/bin/ghcli pr:comment octocat Hello-World 1 "Hello"
 ./vendor/bin/ghcli status:set octocat Hello-World 33375d5f193cfa8d0fe2998ec312c871639257bf -s success -c my/context -t http://www.google.com -d "You have created/updated a commit status my friend"
+./vendor/bin/ghcli deploy:create octocat Hello-World -r 33375d5f193cfa8d0fe2998ec312c871639257bf -e Staging -d "Super deploy"
+./vendor/bin/ghcli deploy:list octocat Hello-World
+./vendor/bin/ghcli deploy:update octocat Hello-World 23079543 -s error -d "Failed it !"
 ```
 
 ## Current modules
@@ -53,8 +56,12 @@ Options:
 Available commands:
   help        Displays help for a command
   list        Lists commands
+ deploy
+  deploy:create  Creates a deployment
+  deploy:list    List deployments for a repo
+  deploy:update  Creates/updates a deployment status
  pr
-  pr:comment  Comment a pull request
+  pr:comment     Comment a pull request
  status
-  status:set  Creates/updates a commit status
+  status:set     Creates/updates a commit status
 ```
