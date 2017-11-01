@@ -19,7 +19,7 @@ pipeline:
   build-release:
     image: fpfis/php71-dev
     commands: 
-      - ./vendor/bin/phar-composer build ${REPO_NAME}:${DRONE_TAG} ghcli.phar
+      - ./vendor/bin/phar-composer build ${REPO_NAME}\:${DRONE_TAG} ghcli.phar
     when:
       event: tag
 
