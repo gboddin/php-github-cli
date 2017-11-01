@@ -24,7 +24,7 @@ if (!class_exists('Gbo\PhpGithubCli\GithubCommand', true)) {
 
 $application = new \Symfony\Component\Console\Application('ghcli');
 
-$application->setVersion('0.2.2');
+$application->setVersion('0.2.3');
 
 /**
  * Get github token :
@@ -35,7 +35,7 @@ if(getenv('GITHUB_API_TOKEN')) {
 } else {
     $configFiles = [
         '.git/config',
-        getenv('HOME').'/.git/config',
+        getenv('HOME').'/.gitconfig',
     ];
     foreach($configFiles as $configFile) {
         if(file_exists($configFile)) {
