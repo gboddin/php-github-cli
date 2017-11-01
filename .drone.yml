@@ -1,0 +1,28 @@
+pipeline:
+  install:
+    image: fpfis/php71-dev
+    commands:
+      - composer install
+  phpcs:
+    image: fpfis/php71-dev
+    commands:
+      - ./vendor/bin/phpcs
+
+  build-dev:
+    image: fpfis/php71-dev
+    commands: ./vendor/bin/phar-composer build . ghcli-dev.phar
+    when:
+      event: push
+
+  build-release:
+    image: fpfis/php71-dev
+    commands: ./vendor/bin/phar-composer build ${REPO_NAME}:${DRONE_TAG} ghcli.phar
+    when:
+      event: tag
+
+  github_release:
+    image: plugins/github-release
+    secrets: [ github_token ]
+    files: ghcli.phar 
+    when:
+      event: tag

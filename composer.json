@@ -23,7 +23,8 @@
         "bin/ghcli"
     ],
     "require-dev": {
-        "squizlabs/php_codesniffer": "^3.0"
+        "squizlabs/php_codesniffer": "^3.0",
+        "clue/phar-composer": "^1.0"
     }
 
 }

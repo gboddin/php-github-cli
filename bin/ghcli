@@ -50,17 +50,20 @@ if(getenv('GITHUB_API_TOKEN')) {
 
 
 /* register all the modules in the command line tool : */
-
-$modules = glob(__DIR__.'/../src/Module/*/*.php');
-
+$modules = new RecursiveIteratorIterator(
+  new RecursiveDirectoryIterator(__DIR__.'/../src/Module')
+);
 /**
  * Setup all modules
  */
 foreach ($modules as $module) {
-    $moduleNameParts = explode('/', $module);
-    $moduleName = str_replace('.php', '', array_pop($moduleNameParts));
-    $moduleNameSpace = array_pop($moduleNameParts);
-    $moduleClass = sprintf('\\Gbo\\PhpGithubCli\\Module\\%s\\%s', $moduleNameSpace, $moduleName);
+    if($module->getExtension() != "php") continue;
+    $moduleClass = 
+      sprintf(
+        '\\Gbo\\PhpGithubCli\\Module\\%s\\%s', 
+        $module->getPathInfo()->getBaseName(), 
+        $module->getBaseName('.php')
+    );
     $application->add(
         new $moduleClass(
                 $token
