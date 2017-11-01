@@ -19,8 +19,9 @@ pipeline:
   build-release:
     image: fpfis/php71-dev
     commands:
+      - composer global require clue/phar-composer 
       - composer install --no-dev 
-      - ./vendor/bin/phar-composer build . ghcli.phar
+      - phar-composer build . ghcli.phar
     when:
       event: tag
 
