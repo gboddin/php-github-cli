@@ -1,5 +1,12 @@
 # PHP github CLI tool
 
+
+## Build status
+
+|Service|master|develop|
+|--|--|--|
+|CI Status|![Status](https://hold-on.nobody.run/api/badges/gboddin/php-github-cli/status.svg?branch=master)|![Status](https://hold-on.nobody.run/api/badges/gboddin/php-github-cli/status.svg?branch=develop)|
+
 ## Intro
 
 This tool is meant to be used in by human and automation tools with PHP projects.
