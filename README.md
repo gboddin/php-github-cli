@@ -15,7 +15,7 @@ composer install gboddin/php-github-cli
 The tool uses Github tokens to authenticate. They can be set in 3 ways :
 
 - Using the GITHUB_API_TOKEN environment variable
-- Global config file ( ~/.git/config )
+- Global config file ( ~/.gitconfig )
 - Local config file ( ./.git/config )
 
 The git config file should look as follow :
