@@ -2,11 +2,6 @@
 <ruleset name="PHP_CodeSniffer">
     <rule ref="PSR2"/>
     <description>ghcli</description>
-
     <file>src</file>
-
-    <!-- Views handlers not strictly follow Drupal class name conventions. -->
-
     <exclude-pattern>vendor</exclude-pattern>
-
 </ruleset>
