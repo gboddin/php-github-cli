@@ -1,4 +1,8 @@
 pipeline:
+  composer-sa-checks:
+    image: fpfis/drone-composer-sa-checker
+    lock_file: composer.lock
+
   install:
     image: fpfis/php71-dev
     commands:
