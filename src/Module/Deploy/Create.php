@@ -25,7 +25,13 @@ class Create extends GithubCommand
             ->addOption('environment', 'e', InputOption::VALUE_REQUIRED, 'Name for the target deployment environment')
             ->addOption('description', 'd', InputOption::VALUE_REQUIRED, 'Short description of the deployment.')
             ->addOption('task', 't', InputOption::VALUE_REQUIRED, 'Specifies a task to execute.', 'deploy')
-            ->addOption('auto_merge', 'm', InputOption::VALUE_NONE, 'Attempts to automatically merge the default branch into the requested ref, if it is behind the default branch.')
+            ->addOption(
+                'auto_merge',
+                'm',
+                InputOption::VALUE_NONE,
+                'Attempts to automatically merge the default branch into the requested ref, 
+                if it is behind the default branch.'
+            )
             ->addOption(
                 'required_contexts',
                 'c',
