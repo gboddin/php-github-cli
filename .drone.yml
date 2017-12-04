@@ -23,9 +23,9 @@ pipeline:
   build-release:
     image: fpfis/php71-dev
     commands:
-      - composer global require clue/phar-composer 
+      - wget https://github.com/clue/phar-composer/releases/download/v1.0.0/phar-composer.phar -O /tmp/phar-composer
       - composer install --no-dev 
-      - phar-composer build . ghcli.phar
+      - php /tmp/phar-composer build . ghcli.phar
     when:
       event: tag
 
