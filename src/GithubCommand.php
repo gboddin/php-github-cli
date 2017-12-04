@@ -50,7 +50,6 @@ abstract class GithubCommand extends SymfonyCommand
                 JSON_PRETTY_PRINT
             )
         );
-
     }
 
     /**
@@ -61,6 +60,4 @@ abstract class GithubCommand extends SymfonyCommand
      * @return mixed
      */
     abstract protected function githubExec(InputInterface $input, OutputInterface $output);
-
-
 }
