@@ -45,13 +45,14 @@ ghcli branch:create octocat Hello-World -t depedency/2.3.78 -s master
 ghcli ref:create octocat HelloWorld -r refs/heads/depedency/2.3.78 -s bdb276f3227a19e826d8d511cfd53639153e0a6a
 ghcli file:update octocat HelloWorld build.properties.lock 'Updated to version 2.3.78' 'depedency.version = 2.3.78' 'depedency/2.3.78' -c
 ghcli pr:create octocat HelloWorld -t "Minor upgrade 2.3.78" -s depedency/2.3.78  -b master -d "Minor upgrade depedency/2.3.78"
+ghcli branch:protect octocat HelloWorld master -T qa-support -t qa-support
 
 ```
 
 ## Current modules
 
 ```
-ghcli version 0.2.7
+ghcli version 0.2.8
 
 Usage:
   command [options] [arguments]
@@ -66,22 +67,22 @@ Options:
   -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 
 Available commands:
-  help           Displays help for a command
-  list           Lists commands
+  help            Displays help for a command
+  list            Lists commands
  branch
-  branch:create  Create a branch from another branch
+  branch:create   Create a branch from another branch
+  branch:protect  Protect a branch
  deploy
-  deploy:create  Creates a deployment
-  deploy:list    List deployments for a repo
-  deploy:update  Creates a deployment status
+  deploy:create   Creates a deployment
+  deploy:list     List deployments for a repo
+  deploy:update   Creates a deployment status
  file
-  file:update    Updates a file
+  file:update     Updates a file
  pr
-  pr:comment     Comment a pull request
-  pr:create      Create a pull request
+  pr:comment      Comment a pull request
+  pr:create       Create a pull request
  ref
-  ref:create     Create a branch from another ref
+  ref:create      Create a branch from another ref
  status
-  status:set     Creates/updates a commit status
-
+  status:set      Creates/updates a commit status
 ```

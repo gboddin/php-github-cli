@@ -24,7 +24,7 @@ if (!class_exists('Gbo\PhpGithubCli\GithubCommand', true)) {
 
 $application = new \Symfony\Component\Console\Application('ghcli');
 
-$application->setVersion('0.2.7');
+$application->setVersion('0.2.8');
 
 /**
  * Get github token :

@@ -4,7 +4,6 @@ namespace Gbo\PhpGithubCli;
 
 use Github\Client;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
-use Symfony\Component\Console\Input\Input;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -44,12 +43,14 @@ abstract class GithubCommand extends SymfonyCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $githubOutput = $this->githubExec($input, $output);
         $output->writeln(
             json_encode(
-                $this->githubExec($input, $output),
+                $githubOutput,
                 JSON_PRETTY_PRINT
             )
         );
+
     }
 
     /**
@@ -60,4 +61,6 @@ abstract class GithubCommand extends SymfonyCommand
      * @return mixed
      */
     abstract protected function githubExec(InputInterface $input, OutputInterface $output);
+
+
 }
