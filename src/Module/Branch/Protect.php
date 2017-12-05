@@ -13,7 +13,7 @@ class Protect extends GithubCommand
     /**
      * Symfony cli module config
      */
-    protected function configure()
+    protected function githubConfigure()
     {
         $this
             ->setName('branch:protect')

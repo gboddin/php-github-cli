@@ -2,6 +2,7 @@
 namespace Gbo\PhpGithubCli\Module\Deploy;
 
 use Gbo\PhpGithubCli\GithubCommand;
+use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -13,7 +14,7 @@ class ListStatus extends GithubCommand
     /**
      * Symfony cli module config
      */
-    protected function configure()
+    protected function githubConfigure()
     {
         $this
             ->setName('deploy:list')
@@ -35,5 +36,17 @@ class ListStatus extends GithubCommand
             $input->getArgument('org'),
             $input->getArgument('repo')
         );
+    }
+
+    protected function humanOutput(OutputInterface $output, $result)
+    {
+        $table = new Table($output);
+        $table->setHeaders(['ID', 'Ref','Environment','User','Date']);
+        foreach ($result as $deployment) {
+            $table->addRow(
+                [$deployment['id'],$deployment['ref'],$deployment['environment'],$deployment['creator']['login'], $deployment['created_at']]
+            );
+        }
+        $table->render();
     }
 }

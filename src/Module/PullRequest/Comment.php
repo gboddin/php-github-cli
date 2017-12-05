@@ -12,7 +12,7 @@ class Comment extends GithubCommand
     /**
      * Symfony cli module config
      */
-    protected function configure()
+    protected function githubConfigure()
     {
         $this
             ->setName('pr:comment')
