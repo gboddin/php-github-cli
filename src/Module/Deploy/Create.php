@@ -83,7 +83,8 @@ class Create extends GithubCommand
     protected function humanOutput(OutputInterface $output, $result)
     {
         $output->writeln(
-            '<info>[OK]</info> Deployment #'.$result['id'].' from ref '.$result['ref'].' to environment '.$result['environment'].' created.'
+            '<info>[OK]</info> Deployment #'.$result['id'].
+            ' from ref '.$result['ref'].' to environment '.$result['environment'].' created.'
         );
     }
 }

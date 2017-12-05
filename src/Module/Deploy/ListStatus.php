@@ -44,7 +44,8 @@ class ListStatus extends GithubCommand
         $table->setHeaders(['ID', 'Ref','Environment','User','Date']);
         foreach ($result as $deployment) {
             $table->addRow(
-                [$deployment['id'],$deployment['ref'],$deployment['environment'],$deployment['creator']['login'], $deployment['created_at']]
+                [$deployment['id'],$deployment['ref'],
+                    $deployment['environment'],$deployment['creator']['login'], $deployment['created_at']]
             );
         }
         $table->render();
