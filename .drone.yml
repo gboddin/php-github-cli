@@ -6,7 +6,7 @@ pipeline:
   install:
     image: fpfis/php71-dev
     commands:
-      - composer install
+      - composer install --amsi
 
   phpcs:
     image: fpfis/php71-dev
@@ -16,7 +16,7 @@ pipeline:
   build-dev:
     image: fpfis/php71-dev
     commands: 
-      - ./vendor/bin/phar-composer build . ghcli-dev.phar
+      - ./vendor/bin/phar-composer --ansi build . ghcli-dev.phar
     when:
       event: push
 
@@ -24,8 +24,8 @@ pipeline:
     image: fpfis/php71-dev
     commands:
       - wget https://github.com/clue/phar-composer/releases/download/v1.0.0/phar-composer.phar -O /tmp/phar-composer
-      - composer install --no-dev 
-      - php /tmp/phar-composer build . ghcli.phar
+      - composer install --ansi --no-dev 
+      - php /tmp/phar-composer --ansi build . ghcli.phar
     when:
       event: tag
 
