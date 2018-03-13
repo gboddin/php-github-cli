@@ -6,7 +6,7 @@ pipeline:
   install:
     image: fpfis/php71-dev
     commands:
-      - composer install --amsi
+      - composer install --ansi
 
   phpcs:
     image: fpfis/php71-dev
