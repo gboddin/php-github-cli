@@ -14,7 +14,7 @@ class Create extends GithubCommand
     /**
      * Symfony cli module config
      */
-    protected function configure()
+    protected function githubConfigure()
     {
         $this
             ->setName('deploy:create')
@@ -77,6 +77,14 @@ class Create extends GithubCommand
             $input->getArgument('org'),
             $input->getArgument('repo'),
             $options
+        );
+    }
+
+    protected function humanOutput(OutputInterface $output, $result)
+    {
+        $output->writeln(
+            '<info>[OK]</info> Deployment #'.$result['id'].
+            ' from ref '.$result['ref'].' to environment '.$result['environment'].' created.'
         );
     }
 }

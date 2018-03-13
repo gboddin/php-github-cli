@@ -5,6 +5,7 @@ namespace Gbo\PhpGithubCli;
 use Github\Client;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class GithubCommand extends SymfonyCommand
@@ -44,12 +45,35 @@ abstract class GithubCommand extends SymfonyCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $githubOutput = $this->githubExec($input, $output);
-        $output->writeln(
-            json_encode(
-                $githubOutput,
-                JSON_PRETTY_PRINT
-            )
+        switch ($input->getOption('output-format')) {
+            case 'json':
+                $output->writeln(
+                    json_encode(
+                        $githubOutput,
+                        JSON_PRETTY_PRINT
+                    )
+                );
+                break;
+            case 'human':
+            default:
+                $this->humanOutput($output, $githubOutput);
+                break;
+        }
+    }
+
+    /**
+     * Add some default options and call githubConfigure()
+     */
+    protected function configure()
+    {
+        $this->addOption(
+            'output-format',
+            'of',
+            InputOption::VALUE_REQUIRED,
+            'Output format (human, json)',
+            'human'
         );
+        $this->githubConfigure();
     }
 
     /**
@@ -60,4 +84,23 @@ abstract class GithubCommand extends SymfonyCommand
      * @return mixed
      */
     abstract protected function githubExec(InputInterface $input, OutputInterface $output);
+
+    /**
+     * @return mixed
+     */
+    abstract protected function githubConfigure();
+
+    /**
+     * Override to do something else than OK
+     * @return mixed
+     */
+    protected function humanOutput(OutputInterface $output, $result)
+    {
+        if (!empty($result->message)) {
+            //failed
+            $output->writeln('<error>[FAILED]</error> '.$this->getName().' : '.$result->message);
+        } else {
+            $output->writeln('<info>[OK]</info> '.$this->getName());
+        }
+    }
 }

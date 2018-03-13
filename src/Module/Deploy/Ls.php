@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ListStatus extends GithubCommand
+class Ls extends GithubCommand
 {
 
     /**
@@ -17,11 +17,10 @@ class ListStatus extends GithubCommand
     protected function githubConfigure()
     {
         $this
-            ->setName('deploy:status-list')
-            ->setDescription('List statuses for a deployment')
+            ->setName('deploy:list')
+            ->setDescription('List deployments for a repo')
             ->addArgument('org', InputArgument::REQUIRED, 'Repo owner')
-            ->addArgument('repo', InputArgument::REQUIRED, 'Repo name')
-            ->addArgument('deploy_id', InputArgument::REQUIRED, 'Status ID');
+            ->addArgument('repo', InputArgument::REQUIRED, 'Repo name');
     }
 
     /**
@@ -33,22 +32,20 @@ class ListStatus extends GithubCommand
      */
     protected function githubExec(InputInterface $input, OutputInterface $output)
     {
-        return self::$githubClient->api('deployment')->getStatuses(
+        return self::$githubClient->api('deployment')->all(
             $input->getArgument('org'),
-            $input->getArgument('repo'),
-            $input->getArgument('deploy_id')
+            $input->getArgument('repo')
         );
     }
 
     protected function humanOutput(OutputInterface $output, $result)
     {
-        $deployment =
         $table = new Table($output);
-        $table->setHeaders(['ID', 'Status','Description','User','Date']);
+        $table->setHeaders(['ID', 'Ref','Environment','User','Date']);
         foreach ($result as $deployment) {
             $table->addRow(
-                [$deployment['id'],$deployment['state'],
-                    $deployment['description'],$deployment['creator']['login'], $deployment['created_at']]
+                [$deployment['id'],$deployment['ref'],
+                    $deployment['environment'],$deployment['creator']['login'], $deployment['created_at']]
             );
         }
         $table->render();
