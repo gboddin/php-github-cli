@@ -35,7 +35,7 @@ class Ls extends GithubCommand
         return $paginator->fetchAll(
             self::$githubClient->search(),
             'repositories',
-             [$input->getArgument('search')]
+            [$input->getArgument('search')]
         );
     }
 
@@ -53,7 +53,7 @@ class Ls extends GithubCommand
 
     protected function csvOutput(OutputInterface $output, $result)
     {
-        foreach($result as $repo) {
+        foreach ($result as $repo) {
             $output->writeln(
                 implode("\t", [
                     $repo['owner']['login'],
