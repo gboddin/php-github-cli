@@ -54,6 +54,10 @@ abstract class GithubCommand extends SymfonyCommand
                     )
                 );
                 break;
+
+            case 'csv':
+                $this->csvOutput($output, $githubOutput);
+                break;
             case 'human':
             default:
                 $this->humanOutput($output, $githubOutput);
@@ -102,5 +106,14 @@ abstract class GithubCommand extends SymfonyCommand
         } else {
             $output->writeln('<info>[OK]</info> '.$this->getName());
         }
+    }
+
+    /**
+     * Override to do something else than OK
+     * @return mixed
+     */
+    protected function csvOutput(OutputInterface $output, $result)
+    {
+        throw new \Exception('Not implemented');
     }
 }
