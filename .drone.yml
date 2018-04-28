@@ -13,22 +13,10 @@ pipeline:
     commands:
       - ./vendor/bin/phpcs
 
-  build-dev:
-    image: fpfis/php71-dev
-    commands: 
-      - ./vendor/bin/phar-composer --ansi build . ghcli-dev.phar
-    when:
-      event: push
-
-  build-release:
-    image: fpfis/php71-dev
-    commands:
-      - wget https://github.com/clue/phar-composer/releases/download/v1.0.0/phar-composer.phar -O /tmp/phar-composer
-      - composer install --ansi --no-dev 
-      - php /tmp/phar-composer --ansi build . ghcli.phar
-    when:
-      event: tag
-
+  build-phar:
+    image: phpdrone/phar-composer
+    output: ghcli.phar
+  
   github_release:
     image: plugins/github-release
     secrets: [ github_token ]
