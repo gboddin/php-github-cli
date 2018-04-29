@@ -6,6 +6,7 @@ pipeline:
   install:
     image: fpfis/php71-dev
     commands:
+      - composer global require hirak/prestissimo
       - composer install --ansi
 
   phpcs:
