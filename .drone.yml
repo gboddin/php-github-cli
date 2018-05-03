@@ -4,12 +4,12 @@ pipeline:
     lock_file: composer.lock
 
   install:
-    image: fpfis/php71-dev
+    image: phpdrone/composer:php56-latest
     commands:
       - composer install --ansi
 
   phpcs:
-    image: fpfis/php71-dev
+    image: phpdrone/composer:php56-latest
     commands:
       - ./vendor/bin/phpcs
 

@@ -24,7 +24,9 @@ class Set extends GithubCommand
             ->addOption('state', 's', InputOption::VALUE_REQUIRED, 'State')
             ->addOption('context', 'c', InputOption::VALUE_REQUIRED, 'Context')
             ->addOption('description', 'd', InputOption::VALUE_REQUIRED, 'Short description')
-            ->addOption('target_url', 't', InputOption::VALUE_REQUIRED, 'Target URL');
+            ->addOption('target_url', 't', InputOption::VALUE_REQUIRED, 'Target URL')
+            ->addOption('avatar_url', 'a', InputOption::VALUE_REQUIRED, 'Avatar URL')
+        ;
     }
 
     /**
