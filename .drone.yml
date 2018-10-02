@@ -16,6 +16,13 @@ pipeline:
   build-phar:
     image: phpdrone/phar-composer
     output: ghcli.phar
+
+  build-docker:
+    image: plugins/docker
+    repo: gboo/ghcli
+    secrets: [ docker_username, docker_password ]
+    when:
+      event: push 
   
   github_release:
     image: plugins/github-release
